@@ -59,7 +59,7 @@ jobs:
           # - arch: aarch64
             # os: ubuntu20.04
           - arch: armv7
-            os: fedora_latest
+            os: bullseye
           # - arch: armv6
             # os: bullseye
     steps:
