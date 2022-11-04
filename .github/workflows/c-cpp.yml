@@ -87,6 +87,6 @@ jobs:
           git checkout master docs/index.d.ts && mv docs/index.d.ts .
           git config --global user.email "pitogo.adones@gmail.com"
           git config --global user.name "Adones Pitogo"
-          git add ${{ matrix.arch }}
+          git add *.node
           git commit -a -m "[GitHub Actions] Updated linux-${{ matrix.arch }} binaries" || true
           git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
