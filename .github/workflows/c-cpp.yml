@@ -61,7 +61,7 @@ jobs:
           # - arch: armv7
             # os: bullseye
           - arch: armv6
-            os: bullseye
+            os: buster
     steps:
       - name: Clone
         run: git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
