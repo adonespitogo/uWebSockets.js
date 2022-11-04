@@ -56,10 +56,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - arch: aarch64
-            os: ubuntu20.04
-          # - arch: armv7
+          # - arch: aarch64
             # os: ubuntu20.04
+          - arch: armv7
+            os: ubuntu22.04
           # - arch: armv6
             # os: bullseye
     steps:
