@@ -13,7 +13,7 @@ jobs:
       - name: Update binaries
         run: |
           $ErrorActionPreference = 'SilentlyContinue'
-          git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
+          git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
           cd uWebSockets.js
           nmake
           git fetch origin binaries:binaries
@@ -36,7 +36,7 @@ jobs:
           sudo xcode-select -switch /Applications/Xcode_12.2.app || true
           sudo apt update || true
           sudo apt install -y g++-aarch64-linux-gnu || true
-          git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
+          git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
           cd uWebSockets.js
           make
           git fetch origin binaries:binaries
@@ -54,10 +54,10 @@ jobs:
     name: Build on ${{ matrix.arch }}
     strategy:
       matrix:
-        arch: [ aarch64, armv6, armv7 ]
+        arch: [aarch64, armv6, armv7]
     steps:
       - name: Clone
-        run: git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
+        run: git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
       - uses: uraimo/run-on-arch-action@v2.3.0
         name: Compile binaries
         with:
