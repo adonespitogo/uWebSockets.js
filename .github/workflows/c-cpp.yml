@@ -16,14 +16,14 @@ jobs:
           git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
           cd uWebSockets.js
           nmake
-          # git fetch origin binaries:binaries
-          # git checkout binaries
-          # xcopy /Y dist\*.node .
-          # git status
-          # git config --global user.email "alexhultman@gmail.com"
-          # git config --global user.name "Alex Hultman"
-          # git commit -a -m "[GitHub Actions] Updated windows-latest binaries"
-          # git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
+          git fetch origin binaries:binaries
+          git checkout binaries
+          xcopy /Y dist\*.node .
+          git status
+          git config --global user.email "pitogo.adones@gmail.com"
+          git config --global user.name "Adones Pitogo"
+          git commit -a -m "[GitHub Actions] Updated windows-latest binaries"
+          git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
 
   build-unix:
     runs-on: ${{ matrix.os }}
@@ -39,16 +39,16 @@ jobs:
           git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
           cd uWebSockets.js
           make
-          # git fetch origin binaries:binaries
-          # git checkout binaries
-          # cp dist/*.node .
-          # git status
-          # git rev-parse master > source_commit
-          # git checkout master docs/index.d.ts && mv docs/index.d.ts .
-          # git config --global user.email "alexhultman@gmail.com"
-          # git config --global user.name "Alex Hultman"
-          # git commit -a -m "[GitHub Actions] Updated ${{ matrix.os }} binaries" || true
-          # git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
+          git fetch origin binaries:binaries
+          git checkout binaries
+          cp dist/*.node .
+          git status
+          git rev-parse master > source_commit
+          git checkout master docs/index.d.ts && mv docs/index.d.ts .
+          git config --global user.email "pitogo.adones@gmail.com"
+          git config --global user.name "Adones Pitogo"
+          git commit -a -m "[GitHub Actions] Updated ${{ matrix.os }} binaries" || true
+          git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
   build-arm:
     runs-on: ubuntu-latest
     name: Build on ${{ matrix.arch }}
@@ -71,16 +71,17 @@ jobs:
           run: |
             cd /repository
             make
-      # - name: Update binaries
-        # run: |
-          # cd uWebSockets.js
-          # git fetch origin binaries:binaries
-          # git checkout binaries
-          # cp dist/*.node .
-          # git status
-          # git rev-parse master > source_commit
-          # git checkout master docs/index.d.ts && mv docs/index.d.ts .
-          # git config --global user.email "alexhultman@gmail.com"
-          # git config --global user.name "Alex Hultman"
-          # git commit -a -m "[GitHub Actions] Updated linux-${{ matrix.arch }} binaries" || true
-          # git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
+      - name: Update binaries
+        run: |
+          cd uWebSockets.js
+          git fetch origin binaries:binaries
+          git checkout binaries
+          mkdir ${{ matrix.arch }}
+          cp dist/*.node ${{ matrix.arch }}
+          git status
+          git rev-parse master > source_commit
+          git checkout master docs/index.d.ts && mv docs/index.d.ts .
+          git config --global user.email "pitogo.adones@gmail.com"
+          git config --global user.name "Adones Pitogo"
+          git commit -a -m "[GitHub Actions] Updated linux-${{ matrix.arch }} binaries" || true
+          git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
