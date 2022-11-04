@@ -56,12 +56,10 @@ jobs:
     strategy:
       matrix:
         include:
-          # - arch: aarch64
-            # os: ubuntu20.04
-          # - arch: armv7
-            # os: bullseye
-          - arch: armv6
-            os: ubuntu18.04
+          - arch: aarch64
+            os: ubuntu20.04
+          - arch: armv7
+            os: bullseye
     steps:
       - name: Clone
         run: git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
@@ -83,8 +81,7 @@ jobs:
           cd uWebSockets.js
           git fetch origin binaries:binaries
           git checkout binaries
-          mkdir ${{ matrix.arch }}
-          cp dist/*.node ${{ matrix.arch }}
+          cp dist/*.node .
           git status
           git rev-parse master > source_commit
           git checkout master docs/index.d.ts && mv docs/index.d.ts .

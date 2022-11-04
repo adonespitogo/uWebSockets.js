@@ -17,14 +17,7 @@
 
 module.exports = (() => {
 	try {
-    if (process.arch === 'arm64') {
-		  return require('./aarch64/uws_' + process.platform + '_' + process.arch + '_' + process.versions.modules + '.node');
-    } else if (process.arch === 'arm') {
-      var { arm_version } = process.config.variables
-      return require('./armv' + arm_version + '/uws_' + process.platform + '_' + process.arch + '_' + process.versions.modules + '.node');
-    } else {
-		  return require('./uws_' + process.platform + '_' + process.arch + '_' + process.versions.modules + '.node');
-    }
+    return require('./uws_' + process.platform + '_' + process.arch + '_' + process.versions.modules + '.node');
 	} catch (e) {
 		throw new Error('This version of uWS.js supports only Node.js 16 and 18, and 19 on (glibc) Linux, macOS and Windows, on Tier 1 platforms (https://github.com/nodejs/node/blob/master/BUILDING.md#platform-list).\n\n' + e.toString());
 	}
