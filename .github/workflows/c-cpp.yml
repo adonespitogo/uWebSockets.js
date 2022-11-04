@@ -5,56 +5,63 @@ on:
     branches: [ arm-32bit-binaries ]
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: ilammy/msvc-dev-cmd@v1
-      - uses: ilammy/setup-nasm@v1.2.1
-      - name: Update binaries
-        run: |
-          $ErrorActionPreference = 'SilentlyContinue'
-          git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
-          cd uWebSockets.js
-          nmake
-          git fetch origin binaries:binaries
-          git checkout binaries
-          xcopy /Y dist\*.node .
-          git status
-          git config --global user.email "pitogo.adones@gmail.com"
-          git config --global user.name "Adones Pitogo"
-          git commit -a -m "[GitHub Actions] Updated windows-latest binaries"
-          git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
+  # build-windows:
+    # runs-on: windows-latest
+    # steps:
+      # - uses: ilammy/msvc-dev-cmd@v1
+      # - uses: ilammy/setup-nasm@v1.2.1
+      # - name: Update binaries
+        # run: |
+          # $ErrorActionPreference = 'SilentlyContinue'
+          # git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
+          # cd uWebSockets.js
+          # nmake
+          # git fetch origin binaries:binaries
+          # git checkout binaries
+          # xcopy /Y dist\*.node .
+          # git status
+          # git config --global user.email "pitogo.adones@gmail.com"
+          # git config --global user.name "Adones Pitogo"
+          # git commit -a -m "[GitHub Actions] Updated windows-latest binaries"
+          # git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
 
-  build-unix:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-11.0, ubuntu-latest]
-    steps:
-      - name: Update binaries
-        run: |
-          sudo xcode-select -switch /Applications/Xcode_12.2.app || true
-          sudo apt update || true
-          sudo apt install -y g++-aarch64-linux-gnu || true
-          git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
-          cd uWebSockets.js
-          make
-          git fetch origin binaries:binaries
-          git checkout binaries
-          cp dist/*.node .
-          git status
-          git rev-parse master > source_commit
-          git checkout master docs/index.d.ts && mv docs/index.d.ts .
-          git config --global user.email "pitogo.adones@gmail.com"
-          git config --global user.name "Adones Pitogo"
-          git commit -a -m "[GitHub Actions] Updated ${{ matrix.os }} binaries" || true
-          git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
+  # build-unix:
+    # runs-on: ${{ matrix.os }}
+    # strategy:
+      # matrix:
+        # os: [macos-11.0, ubuntu-latest]
+    # steps:
+      # - name: Update binaries
+        # run: |
+          # sudo xcode-select -switch /Applications/Xcode_12.2.app || true
+          # sudo apt update || true
+          # sudo apt install -y g++-aarch64-linux-gnu || true
+          # git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
+          # cd uWebSockets.js
+          # make
+          # git fetch origin binaries:binaries
+          # git checkout binaries
+          # cp dist/*.node .
+          # git status
+          # git rev-parse master > source_commit
+          # git checkout master docs/index.d.ts && mv docs/index.d.ts .
+          # git config --global user.email "pitogo.adones@gmail.com"
+          # git config --global user.name "Adones Pitogo"
+          # git commit -a -m "[GitHub Actions] Updated ${{ matrix.os }} binaries" || true
+          # git push "https://adonespitogo:${{ secrets.SECRET }}@github.com/adonespitogo/uWebSockets.js" binaries
+
   build-arm:
     runs-on: ubuntu-latest
     name: Build on ${{ matrix.arch }}
     strategy:
       matrix:
-        arch: [aarch64, armv6, armv7]
+        include:
+          - arch: aarch64
+            os: ubuntu22.04
+          - arch: armv6
+            os: bullseye
+          - arch: armv7
+            os: ubuntu22.04
     steps:
       - name: Clone
         run: git clone --recursive https://github.com/adonespitogo/uWebSockets.js.git
@@ -62,12 +69,12 @@ jobs:
         name: Compile binaries
         with:
           arch: ${{ matrix.arch }}
-          distro: bullseye
+          distro: ${{ matrix.os }}
           dockerRunArgs: |
             --volume "${PWD}/uWebSockets.js:/repository"
           install: |
             apt-get update -q -y
-            apt-get install -q -y build-essential cmake clang libz-dev golang curl
+            apt-get install -q -y build-essential cmake clang libz-dev libunwind-dev golang curl
           run: |
             cd /repository
             make
