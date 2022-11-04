@@ -84,7 +84,7 @@ jobs:
           # git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
 
   build-armv6:
-    runs-on: buster
+    runs-on: ubuntu-latest
     name: Build on armv6
     steps:
       - name: Clone
@@ -117,7 +117,7 @@ jobs:
           # git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
 
   build-armv7:
-    runs-on: ubuntu22.04
+    runs-on: ubuntu-latest
     name: Build on armv7
     steps:
       - name: Clone
