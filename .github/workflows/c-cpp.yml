@@ -59,7 +59,7 @@ jobs:
           # - arch: aarch64
             # os: ubuntu20.04
           - arch: armv7
-            os: ubuntu22.04
+            os: ubuntu18.04
           # - arch: armv6
             # os: bullseye
     steps:
