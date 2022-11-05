@@ -4,7 +4,7 @@
 <br><br>
 
 <a href="https://github.com/uNetworking/uWebSockets.js/releases"><img src="https://img.shields.io/github/v/release/uNetworking/uWebSockets.js"></a> <a href="https://lgtm.com/projects/g/uNetworking/uWebSockets.js/context:cpp"><img alt="Language grade: C/C++" src="https://img.shields.io/lgtm/grade/cpp/g/uNetworking/uWebSockets.js.svg?logo=lgtm&logoWidth=18"/></a> <a href="https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:uwebsockets"><img src="https://oss-fuzz-build-logs.storage.googleapis.com/badges/uwebsockets.svg" /></a> <img src="https://img.shields.io/badge/downloads-65%20million-pink" />
-  
+
 <a href="https://unetworkingab.medium.com/a-shorter-take-on-the-npm-slander-38525dbe9484">In response to slander</a>
 </div>
 <br><br>
@@ -19,7 +19,7 @@ require('uWebSockets.js').SSLApp({
   /* There are more SSL options, cut for brevity */
   key_file_name: 'misc/key.pem',
   cert_file_name: 'misc/cert.pem',
-  
+
 }).ws('/*', {
 
   /* There are many common helper features */
@@ -31,22 +31,22 @@ require('uWebSockets.js').SSLApp({
   /* For brevity we skip the other events (upgrade, open, ping, pong, close) */
   message: (ws, message, isBinary) => {
     /* You can do app.publish('sensors/home/temperature', '22C') kind of pub/sub as well */
-    
+
     /* Here we echo the message back, using compression if available */
     let ok = ws.send(message, isBinary, true);
   }
-  
+
 }).get('/*', (res, req) => {
 
   /* It does Http as well */
   res.writeStatus('200 OK').writeHeader('IsExample', 'Yes').end('Hello there!');
-  
+
 }).listen(9001, (listenSocket) => {
 
   if (listenSocket) {
     console.log('Listening to port 9001');
   }
-  
+
 });
 ```
 
@@ -64,7 +64,7 @@ Low latencies are key to customer satisfaction and your competitive edge. Run lo
 We've been fully standards compliant with a perfect Autobahn|Testsuite score since 2016<sup><a href="https://unetworking.github.io/uWebSockets.js/report.pdf">2</a></sup>. µWebSockets powers many of the biggest crypto exchanges in the world, handling trade volumes of multiple billions of USD every day. If you trade crypto, chances are you do so via µWebSockets.
 
 ### :package: Easily installed
-We *recommend, for simplicity* installing with `yarn add uWebSockets.js@uNetworking/uWebSockets.js#v20.10.0` or any such [release](https://github.com/uNetworking/uWebSockets.js/releases).
+We *recommend, for simplicity* installing with `yarn add AdoPiSoft/uWebSockets.js#v20.14.0` or any such [release](https://github.com/AdoPiSoft/uWebSockets.js/releases).
 
 Being an open source project, you are of course perfectly free to choose [other ways of installation](https://docs.npmjs.com/cli/v6/commands/npm-install) as you might prefer.
 
@@ -75,7 +75,7 @@ Don't hesitate <a href="mailto:alexhultman@gmail.com">sending a mail</a> if you'
 
 Special thanks to BitMEX, Bitfinex, Google, Coinbase, Bitwyre and deepstreamHub for allowing the project itself to thrive on GitHub since 2016 - this project would not be possible without these beautiful companies.
 
-<img src="https://github.com/uNetworking/uWebSockets/raw/master/misc/2018.png" />
+<img src="./misc/2018.png" />
 
 ### :gear: Gear up
 If performance is of utter importance, you don't necessarily have to use JavaScript/Node.js but could write apps in C++ using [µWebSockets](https://github.com/uNetworking/uWebSockets) directly. It works exactly the same way, and will offer the best performance for those highly demanding applications where scripting won't do.
